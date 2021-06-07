@@ -63,7 +63,7 @@ class UserRepositoryImplTest {
     }
 
     @Test
-    @DisplayName("Find all products")
+    @DisplayName("Find all users")
     void findAll() {
         fillinUsers();
         List<User> result = userRepository.findAll();

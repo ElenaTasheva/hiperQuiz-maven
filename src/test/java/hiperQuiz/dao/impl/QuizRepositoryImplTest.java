@@ -1,16 +1,13 @@
 package hiperQuiz.dao.impl;
 
 import hiperQuiz.dao.QuizRepository;
-import hiperQuiz.dao.impl.LongKeyGenerator;
-import hiperQuiz.dao.impl.QuizRepositoryImpl;
+
 import hiperQuiz.model.Quiz;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,6 +52,7 @@ public class QuizRepositoryImplTest  {
 
 
     @Test
+    // todo 3 tests
     void findByIsReturningASetOfTestsByTitleDescriptionOrTags() {
             fillInQuizzes();
          Set<Quiz> testSet = qr.findBy("test");

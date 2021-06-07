@@ -30,14 +30,12 @@ import static hiperQuiz.util.Alignment.*;
 public class Engine implements Runnable{
 
     private final Scanner scanner;
-    // make it final
     private  QuizService quizService;
     private final UserRepository userRepository;
     private final QuizResultRepository quizResultRepository;
     private final PlayerRepository playerRepository;
     private  User user;
-    // todo make it final
-    private  UserService userService;
+    private  final UserService userService;
     private Player player;
     private final QuizRepository quizRepository;
 
@@ -49,6 +47,8 @@ public class Engine implements Runnable{
         this.quizResultRepository = new QuizResultRepositoryImpl(new LongKeyGenerator());
         this.playerRepository = new PlayerRepositoryImpl(new LongKeyGenerator());
         this.quizRepository = new QuizRepositoryImpl(new LongKeyGenerator());
+        this.userService = new UserServiceImpl(userRepository);
+        this.quizService = new QuizServiceImpl(quizRepository);
 
         user = new User();
     }
@@ -59,7 +59,6 @@ public class Engine implements Runnable{
     public void run() {
 
         loadData();
-        userService = new UserServiceImpl(userRepository);
         quizService = new QuizServiceImpl(quizRepository);
         printMenu();
 
