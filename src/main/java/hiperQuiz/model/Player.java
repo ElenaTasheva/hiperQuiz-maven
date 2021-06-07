@@ -4,9 +4,8 @@ package hiperQuiz.model;
 import hiperQuiz.model.enums.Rank;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Player extends User {
 
@@ -23,10 +22,11 @@ public class Player extends User {
 
 
     public int getOverallScore() {
-        for (QuizResult result : results) {
-            this.overallScore += result.getScore();
-        }
-        return overallScore;
+        AtomicInteger score = new AtomicInteger();
+         results.stream().forEach(quizResult -> {
+            score.addAndGet(quizResult.getScore());
+        });
+         return score.get();
     }
 
     public Rank getRank() {

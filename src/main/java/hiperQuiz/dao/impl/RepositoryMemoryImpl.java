@@ -75,6 +75,7 @@ public class RepositoryMemoryImpl<K, V extends Identifiable<K>> implements Repos
                         String.format("Entity with ID='%s' already exists.", entity.getId()));
             } else {
                 n++;
+                keyGenerator.getNextId();
             }
         }
         return n;

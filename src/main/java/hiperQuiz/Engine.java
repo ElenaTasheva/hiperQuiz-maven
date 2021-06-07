@@ -132,7 +132,7 @@ public class Engine implements Runnable{
 
                     player.addQuizResult(quizResult);
                     System.out.printf("Thank you for playing.\n Your score is %d\n", player.getCurrentQuizScore());
-                    System.out.println("Do you want to view the quiz?\n 1) YES 2) NO");
+                    System.out.println("Do you want to view the quiz?\n YES) 1 NO) 2");
                     String answer = scanner.nextLine();
 
                     if (answer.equals("1")) {
@@ -146,9 +146,11 @@ public class Engine implements Runnable{
                     break;
                 case 5:
                     userLogin();
+                    System.out.println("Enter a new password");
                     String password = scanner.nextLine();
                     try {
                         this.userService.updatePassword(user, password);
+                        System.out.println("Your password has been change successfully");
                     } catch (EntityNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
@@ -197,7 +199,7 @@ public class Engine implements Runnable{
 
         List<PrintUtil.ColumnDescriptor> userColumns = new ArrayList<>(List.of(
                 new PrintUtil.ColumnDescriptor("id", "ID", 5, CENTER),
-                new PrintUtil.ColumnDescriptor("username", "Username", 5, LEFT),
+                new PrintUtil.ColumnDescriptor("username", "Username", 10, LEFT),
                 new PrintUtil.ColumnDescriptor("overallScore", "overallScore", 12, LEFT),
                 new PrintUtil.ColumnDescriptor("rank", "rank", 20, LEFT)
 
@@ -298,7 +300,7 @@ public class Engine implements Runnable{
 ;
         List<PrintUtil.ColumnDescriptor> quizColumns = new ArrayList<>(List.of(
                 new PrintUtil.ColumnDescriptor("id", "ID", 5, CENTER),
-                new PrintUtil.ColumnDescriptor("title", "Title", 10, LEFT),
+                new PrintUtil.ColumnDescriptor("title", "Title", 15, LEFT),
                 new PrintUtil.ColumnDescriptor("author", "Author", 12, LEFT),
                 new PrintUtil.ColumnDescriptor("description", "Description", 20, LEFT),
                 new PrintUtil.ColumnDescriptor("expectedDuration", "Duration", 8, RIGHT, 2),

@@ -8,7 +8,12 @@ public class LongKeyGenerator implements KeyGenerator<Long> {
 
     private AtomicLong sequence = new AtomicLong();
 
+    public LongKeyGenerator() {
+    }
 
+    public LongKeyGenerator(AtomicLong sequence) {
+        this.sequence = sequence;
+    }
 
     @Override
     public Long getNextId() {
