@@ -1,5 +1,7 @@
 package hiperQuiz.service.impl;
 
+import hiperQuiz.commands.PrintingCommand;
+import hiperQuiz.commands.ReadingCommand;
 import hiperQuiz.dao.UserRepository;
 import hiperQuiz.dao.impl.LongKeyGenerator;
 import hiperQuiz.dao.impl.UserRepositoryImpl;
@@ -8,7 +10,6 @@ import hiperQuiz.model.User;
 import hiperQuiz.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,13 +18,17 @@ class UserServiceImplTest {
     private  UserRepository userRepository;
     private  LongKeyGenerator keyGenerator;
     private  UserService userService;
+    private PrintingCommand printingCommand;
+    private ReadingCommand readingCommand;
     private  User user;
 
     @BeforeEach
     public void setUp() {
         keyGenerator=new LongKeyGenerator();
         userRepository=new UserRepositoryImpl(keyGenerator);
-        userService = new UserServiceImpl(userRepository);
+        printingCommand = new PrintingCommand();
+        readingCommand = new ReadingCommand();
+        userService = new UserServiceImpl(userRepository, printingCommand, readingCommand);
         user = new User("TestUser");
     }
 
