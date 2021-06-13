@@ -1,5 +1,12 @@
 package hiperQuiz.model;
 
+import jdk.jfr.Enabled;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Answer extends BaseEntity<Long, Answer> {
 
      private Question question; //reference to the Question to which the Answer belongs;
@@ -22,6 +29,8 @@ public class Answer extends BaseEntity<Long, Answer> {
         this.question = question;
     }
 
+    @Column(nullable = false)
+    @Size(min = 2, max = 150, message = "Answer`s length must be between 2 and 150 characters long")
     public String getText() {
         return text;
     }
@@ -30,6 +39,7 @@ public class Answer extends BaseEntity<Long, Answer> {
         this.text = text;
     }
 
+    @Column
     public String getPicture() {
         return picture;
     }
@@ -38,9 +48,11 @@ public class Answer extends BaseEntity<Long, Answer> {
         this.picture = picture;
     }
 
+    @Column
     public int getScore() {
         return score;
     }
+
 
     public void setScore(int score) {
         this.score = score;

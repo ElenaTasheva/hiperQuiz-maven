@@ -1,8 +1,13 @@
 package hiperQuiz.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "quizez")
 public class Quiz extends BaseEntity<Long, Quiz> {
 
     //todo add method to add questions
@@ -31,6 +36,8 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.description = description;
     }
 
+    @Column(nullable = false)
+    @Size(min = 2, max = 80)
     public String getTitle() {
         return title;
     }
@@ -39,6 +46,7 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.title = title;
     }
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     public User getAuthor() {
         return author;
     }
@@ -47,6 +55,8 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.author = author;
     }
 
+    @Column
+    @Size(min = 20, max = 250)
     public String getDescription() {
         return description;
     }
@@ -55,6 +65,7 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.description = description;
     }
 
+    @OneToMany(mappedBy = "quiz")
     public List<Question> getQuestions() {
         return questions;
     }
@@ -63,6 +74,8 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.questions = questions;
     }
 
+    @Column
+    @Size(min = 1)
     public int getExpectedDuration() {
         return expectedDuration;
     }
@@ -71,6 +84,7 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.expectedDuration = expectedDuration;
     }
 
+    @Column
     public String getURL() {
         return URL;
     }
@@ -79,6 +93,7 @@ public class Quiz extends BaseEntity<Long, Quiz> {
         this.URL = URL;
     }
 
+    @Column
     public String getTags() {
         return tags;
     }

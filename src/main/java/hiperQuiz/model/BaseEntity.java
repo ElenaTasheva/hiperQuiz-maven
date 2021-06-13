@@ -1,15 +1,18 @@
 package hiperQuiz.model;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-
+@MappedSuperclass
 public abstract class BaseEntity<K extends Comparable<K>, V extends Identifiable<K>>
     implements Identifiable<K>, Comparable<V>, Serializable {
+
 
     private K id;
     private LocalDateTime created;
     private LocalDateTime modified;
+
 
 
 
@@ -20,7 +23,12 @@ public abstract class BaseEntity<K extends Comparable<K>, V extends Identifiable
         created = LocalDateTime.now();
     }
 
+    @Column
+    public LocalDateTime getModified() {
+        return modified;
+    }
 
+    @Column(nullable = false)
     public LocalDateTime getCreated() {
         return created;
     }
@@ -65,6 +73,8 @@ public abstract class BaseEntity<K extends Comparable<K>, V extends Identifiable
     }
 
     @Override
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public K getId() {
         return this.id;
     }
@@ -74,6 +84,9 @@ public abstract class BaseEntity<K extends Comparable<K>, V extends Identifiable
         this.id = id;
     }
 
-
+    @PrePersist
+    public void prePersist(){
+        setCreated(LocalDateTime.now());
+    }
 }
 

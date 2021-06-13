@@ -3,6 +3,7 @@ package hiperQuiz.model;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Administrator extends User {
     List<Quiz> quizzesBlocked = new ArrayList<>();
 

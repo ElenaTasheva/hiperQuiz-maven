@@ -1,9 +1,19 @@
 package hiperQuiz.model;
 
+import lombok.NonNull;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+@Entity
+@Table(name = "quiz_results")
 public class QuizResult extends BaseEntity<Long, QuizResult> {
 
     //todo check if player can be Administrator as well;
-    private Player player; //the -  reference to the User (Player) taking the 'Quiz;
+    // changing player entity to User as there wont be a PLayerRepo or Table players
+    private User player; //the -  reference to the User (Player) taking the 'Quiz;
     private Quiz quiz; //quiz - reference to the Quiz taken;
     private int score; // (sum of Answer scores for all answered questions);
 
@@ -15,7 +25,9 @@ public class QuizResult extends BaseEntity<Long, QuizResult> {
         this.quiz = quiz;
     }
 
-    public Player getPlayer() {
+    @ManyToOne(optional = false)
+    @NonNull
+    public User getPlayer() {
         return player;
     }
 
@@ -23,6 +35,8 @@ public class QuizResult extends BaseEntity<Long, QuizResult> {
         this.player = player;
     }
 
+    @ManyToOne(optional = false)
+    @NonNull
     public Quiz getQuiz() {
         return quiz;
     }
@@ -31,6 +45,15 @@ public class QuizResult extends BaseEntity<Long, QuizResult> {
         this.quiz = quiz;
     }
 
+    public void setPlayer(User player) {
+        this.player = player;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    @Transient
     public int getScore() {
         return score;
     }

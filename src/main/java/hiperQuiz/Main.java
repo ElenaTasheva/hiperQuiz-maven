@@ -1,9 +1,20 @@
 package hiperQuiz;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
 public class Main {
 
     public static void main(String[] args) {
 
+//
+//        try (Connection connection = DriverManager.getConnection(props.getProperty("url"), props)) {
+//            System.out.printf("Successfully connected to: %s%n", props.getProperty("url"));
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("hiperQuizPU");
+        EntityManager em = entityManagerFactory.createEntityManager();
         Engine engine = new Engine();
         engine.run();
 
